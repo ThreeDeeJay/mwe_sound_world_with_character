@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   Windows:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
 
     - uses: actions/checkout@v4
@@ -36,9 +36,12 @@ jobs:
     - name: Configure CMake
       run: cmake -S . -B ${{env.Artifacts}}
 
-    - name: Build
-      run: cmake --build ${{env.Artifacts}} -- --ignore-errors
+    - name: MSBuild
+      run: MSBuild -help
 
+    - name: Build
+      run: cmake --build ${{env.Artifacts}}
+      
     - name: Upload Installer Artifact to GitHub
       uses: actions/upload-artifact@v2
       with:
