@@ -37,7 +37,7 @@ jobs:
       run: cmake -S . -B ${{env.Artifacts}}
 
     - name: Build
-      run: cmake --ignore-errors --build ${{env.Artifacts}}
+      run: cmake --build ${{env.Artifacts}} --ignore-errors
 
     - name: Upload Installer Artifact to GitHub
       uses: actions/upload-artifact@v2
