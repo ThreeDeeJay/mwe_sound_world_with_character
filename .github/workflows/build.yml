@@ -37,7 +37,8 @@ jobs:
       run: cmake -S . -B ${{env.Artifacts}}
 
     - name: Build
-      run: cmake --build ${{env.Artifacts}} -- /Property:ContinueOnError=true
+      run: cmake --build ${{env.Artifacts}}
+#      run: cmake --build ${{env.Artifacts}} -- /Property:ContinueOnError=true
       
     - name: Upload Installer Artifact to GitHub
       uses: actions/upload-artifact@v2
