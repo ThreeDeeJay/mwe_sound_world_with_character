@@ -33,6 +33,9 @@ jobs:
         echo "CommitHashShort=$(git rev-parse --short=7 HEAD)" >> $env:GITHUB_ENV
         echo "CommitCount=$(git rev-list --count $env:GITHUB_REF_NAME)" >> $env:GITHUB_ENV
 
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
     - name: Configure CMake
       run: cmake -S . -B ${{env.Artifacts}}
 
@@ -40,6 +43,7 @@ jobs:
       run: |
         cmake --build ${{env.Artifacts}} -- /Property:ContinueOnError=true
         cd "${{env.Artifacts}}"
+        nuget restore ${{env.Solution}}
         msbuild /m ${{env.Solution}}
 #        msbuild /m ${{env.Solution}} #/p:Configuration="${{env.Configuration}}" /p:Platform="${{env.Platform}}"
 
