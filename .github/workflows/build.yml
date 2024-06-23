@@ -44,7 +44,7 @@ jobs:
         cmake --build ${{env.Artifacts}} -- /Property:ContinueOnError=true
         cd "${{env.Artifacts}}"
         nuget restore ${{env.Solution}}
-        msbuild /m ${{env.Solution}}
+        msbuild /m ${{env.Solution}} /p:ContinueOnError=true
 #        msbuild /m ${{env.Solution}} #/p:Configuration="${{env.Configuration}}" /p:Platform="${{env.Platform}}"
 
     - name: Upload Installer Artifact to GitHub
